@@ -1,0 +1,101 @@
+<!-- <div class="container mt-4">
+
+
+  <h2 class="text-center"> Create author account </h2>
+
+  <div class="col-6 mx-auto">
+
+
+
+      <input [(ngModel)]="author.name" type="text" class="form-control m-1" placeholder="name">
+      <input [(ngModel)]="author.lastname" type="text" class="form-control m-1" placeholder="lastname">
+      <input [(ngModel)]="author.email" type="text" class="form-control m-1" placeholder="email">
+      <input [(ngModel)]="author.password" type="password" class="form-control m-1" placeholder="password">
+      <input type="file" (change)="select($event)" class="form-control m-1" placeholder="image">
+      <textarea [(ngModel)]="author.about" name="" id="" cols="30" rows="4" placeholder="about" class="form-control m-1" ></textarea>
+
+      <button (click)="register()" class="btn btn-dark form-control m-1">Register</button>
+
+
+  </div>
+
+</div> -->
+
+<div class="container mt-4">
+  <h2 class="text-center"> Create Account </h2>
+  <div class="col-6 mx-auto">
+    <form (ngSubmit)="register()" #registerForm="ngForm" novalidate>
+      <input [(ngModel)]="author.name"
+             name="name"
+             type="text"
+             class="form-control m-1"
+             placeholder="name"
+             required
+             minlength="2"
+             #name="ngModel">
+      <div *ngIf="name.invalid && name.touched" class="text-danger">
+        <small *ngIf="name.errors?.['required']">Name is required</small>
+        <small *ngIf="name.errors?.['minlength']">Name must be at least 2 characters long</small>
+      </div>
+
+      <input [(ngModel)]="author.lastname"
+             name="lastname"
+             type="text"
+             class="form-control m-1"
+             placeholder="lastname"
+             required
+             minlength="2"
+             #lastname="ngModel">
+      <div *ngIf="lastname.invalid && lastname.touched" class="text-danger">
+        <small *ngIf="lastname.errors?.['required']">Last name is required</small>
+        <small *ngIf="lastname.errors?.['minlength']">Last name must be at least 2 characters long</small>
+      </div>
+
+      <input [(ngModel)]="author.email"
+             name="email"
+             type="email"
+             class="form-control m-1"
+             placeholder="email"
+             required
+             email
+             #email="ngModel">
+      <div *ngIf="email.invalid && email.touched" class="text-danger">
+        <small *ngIf="email.errors?.['required']">Email is required</small>
+        <small *ngIf="email.errors?.['email']">Please enter a valid email</small>
+      </div>
+
+      <input [(ngModel)]="author.password"
+             name="password"
+             type="password"
+             class="form-control m-1"
+             placeholder="password"
+             required
+             minlength="6"
+             #password="ngModel">
+      <div *ngIf="password.invalid && password.touched" class="text-danger">
+        <small *ngIf="password.errors?.['required']">Password is required</small>
+        <small *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long</small>
+      </div>
+
+      <input type="file" (change)="select($event)" class="form-control m-1" placeholder="image">
+
+      <textarea [(ngModel)]="author.about"
+                name="about"
+                id=""
+                cols="30"
+                rows="4"
+                placeholder="about"
+                class="form-control m-1"
+                required
+                minlength="10"
+                #about="ngModel"></textarea>
+      <div *ngIf="about.invalid && about.touched" class="text-danger">
+        <small *ngIf="about.errors?.['required']">About is required</small>
+        <small *ngIf="about.errors?.['minlength']">Please write at least 10 characters</small>
+      </div>
+
+      <button [disabled]="registerForm.invalid" class="btn btn-dark form-control m-1">Register</button>
+    </form>
+    <div *ngIf="errorMessage" class="text-danger text-center">{{ errorMessage }}</div>
+  </div>
+</div>
